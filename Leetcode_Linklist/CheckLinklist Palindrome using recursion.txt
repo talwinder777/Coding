@@ -1,0 +1,42 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int len = 0;
+    boolean flag = true;
+    ListNode Head;
+    public boolean isPalindrome(ListNode head) {
+        Head = head;
+        if(head == null || head.next == null)
+            return true;
+        checkPal(head, 1);
+        return flag;
+    }
+    public ListNode checkPal(ListNode head, int count){
+        if(head.next == null){
+            if(count % 2 != 0)
+                len = count - 1;
+            else
+                len = count;
+            return head;
+        }
+        count = count+1;
+        ListNode node = checkPal(head.next, count);
+    //    System.out.println("count = "+ count+" node = "+node.val+" Head = "+ Head.val + " count = "+ count + " len ="+len);
+        
+        if(count > len/2){
+           // System.out.println("in" + len);
+            if(node.val != Head.val)
+                flag = false;
+            Head = Head.next;
+        }
+        count--;
+        return head;
+        
+    }
+}
