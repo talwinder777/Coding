@@ -1,0 +1,50 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int m_size = nums1.length;
+        int n_size = nums2.length;
+        int c = 0;
+
+            int count  = 0;
+            if(n != 0){
+                int fi = 0;
+                int si = 0;
+                while(count != m){
+                    
+                    if(nums1[fi] < nums2[si]){
+                        fi++;
+                        count++;
+                        //System.out.println("in first if fi = "+ fi+" count = "+count);
+                    }
+                    if(nums1[fi] >= nums2[si]){
+                        move(fi, nums1);
+                        nums1[fi] = nums2[si];
+                        fi++;
+                        si++;
+                        if(si == n)
+                            break;
+                        //System.out.println("in sec if fi = "+ fi+" count = "+count + " nums[fi]" + nums1[fi-1]);
+                        //count++;
+                    }
+                }
+                 
+                //System.out.println("si = "+si + " count = "+count+" fi = "+ fi);
+                
+                if(si < n){
+                    while(si < n)
+                        nums1[fi++] = nums2[si++];
+                }
+            }
+               
+
+        }
+    
+    
+    public void move(int i, int[] nums1){
+       // System.out.println( "i = "+i);
+        for(int j = nums1.length - 1; j > i ; j--){
+            nums1[j] = nums1[j-1];
+            //System.out.println("in function ");
+        }
+        
+    }
+}
