@@ -1,0 +1,26 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        String letters[] = new String[]{"abc", "def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        List<String> res = new ArrayList<String>();
+        if(digits.length() == 0)return res;
+        make(digits, letters, res, "");
+        return res;    
+    }
+    public void make(String digits, String[] letters, List<String> res, String cur){
+        if(digits.length() == cur.length())
+        {
+            res.add(cur);
+            return;
+        }
+        int digits_index = cur.length();
+        char digit = digits.charAt(digits_index);
+        int loop_bound = letters[digit - '2'].length();
+        
+        for(int i = 0; i < loop_bound; i++){
+            cur += letters[digit - '2'].charAt(i);
+            make(digits, letters, res, cur);
+            //System.out.println("cur = "+cur);
+            cur = cur.substring(0, (cur.length() - 1));
+        }
+    }
+}
