@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null)
+            return null;
+        if(root == p || root == q)
+            return root;
+        if(search(root.left, p, q) && search(root.right, p, q))
+            return root;
+        
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        if(left != null)
+            return left;
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if(right != null)
+            return right;
+        return null;
+        
+    }
+    public boolean search(TreeNode root, TreeNode p, TreeNode q){
+        if(root == null)return false;
+        if(root == p || root == q)
+            return true;
+        return search(root.left, p, q) || search(root.right, p, q);
+        
+    }
+}
+
+// time complexity - O(n) and space complexity - O(n)
